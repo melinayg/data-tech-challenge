@@ -1,66 +1,15 @@
-# Generate: Data Branch Tech Challenge
-Congratulations on making it to the second stage of the application! Thank you for applying to Generate and choosing the Data Branch! 
+# Generate: Data Branch Tech Challenge 
 
-In this step of the application process, you will be completing a take-home challenge and have an interview. In the interview, you will share your screen and walk us through the process you went through to complete the challenge. Be creative! Show us what you know!
+# My Process
 
-**DO NOT** use generative AI (ChatGPT, Claude, etc.) in any part of your challenge. It is important to think outside the box and try different things! If you have any questions about any part of the challenge, don't hesitate to reach out to any one of us!
+To begin my analysis, I made sure the dataset was clean and free of any major outliers or inconsistencies. I used functions like .describe() and .isna() to confirm there were no missing or distorted values that could impact the results. Then, I created a Route column by combining city pairs and grouped the data by route to calculate the total number of passengers. Using this, I identified the top 10 routes with the highest passenger traffic, and visualized them using an Altair bar chart. The analysis showed that Sydney–Auckland was the busiest route, with over 3 million passengers over time. I repeated this process to find the least-traveled routes, which revealed that Melbourne–Denver had very low passenger numbers, making it one of the least used routes. Moving on to trends across regions, I began by examining which countries and regions consistently showed high levels of passenger activity to better understand broader travel patterns.
 
-Please finish this challenge before the date of your interview. Please read through this document thoroughly to make sure you follow ALL instructions. Try your best, and we can't wait to meet you!
+I created a mapping of each country to its broader region and applied this to the dataset, creating a new column for destination region. I then used an Altair chart to visualize passenger traffic by region over time. The chart showed that travel from Australia into Asia consistently increased until around 1989, when there was a sudden drop in traffic overall. This suggests there may have been a policy change, travel restriction, or economic shift around that time. Next, I explored inbound versus outbound passenger traffic by creating a heatmap based on the difference between incoming and outgoing traffic. In this visualization, red (negative values) represented more outbound travel, while blue (positive values) indicated more inbound traffic. The heatmap revealed that Hong Kong and Singapore had strong inbound travel into Australia, while countries like the UK and USA saw more outbound travel from Australia, especially in 1989. While some of these trends appeared random, they also highlight interesting shifts that could be linked to changes in population, policy, or global events.
 
+Moving on to my predictive modeling, I used Prophet to forecast passenger traffic trends for individual city routes. First, I prepared my data by creating a column for each city pair and aggregating total passenger traffic over time. I then initialized and fit the Prophet model to that data. Prophet includes a built-in function to generate future dates, so I extended the dataset by one year into the future and asked the model to predict traffic for that period. The output included predicted values (yhat) as well as upper and lower bounds for uncertainty. I visualized the results using Prophet’s plotting function, which showed that the forecasted patterns in 1990 closely mimicked seasonal trends seen in earlier years. To dive deeper, I used the plot_components function, which breaks down the forecast into components like yearly, weekly, and daily trends.
 
-# Synopsis
-You're been brought in as a Data Scientist on a project with AeroConnect, an international airline focused on optimizing its routes and expanding profitable city pairs. The client wants to know:   
-    a) Which routes have the highest and lowest passenger traffic over time?  
-    b) Are there any trends or growth patterns across different cities or regions?  
-    c) Can we predict traffic to help with resource allocations(aircrafts, crew, etc.)?  
+I chose to use Prophet because it automatically handles seasonal patterns often found in travel data, such as travel peaks and holiday surges. It also accounts for uncertainty, which is especially important in a domain as unpredictable as airline traffic. Prophet’s ability to break down forecasts into components like trend, seasonality, and holidays makes it well-suited for understanding traffic patterns on multiple levels. 
 
+After building my model, I evaluated its performance using the R² score, which showed that the model explained a good amount of variance in passenger traffic. Although the mean absolute error (MAE) was about 3,500 passengers per month, I believe this reflects the natural fluctuations in airline demand — some months are much higher than others. Finally, I used the model to forecast future traffic across all city routes. By iterating over each route and fitting separate Prophet models, I found that Sydney–Auckland and Sydney–Tokyo are expected to remain top-performing routes, while routes like Melbourne–Port Vila and Sydney–Seattle are projected to decline. Based on this, AeroConnect should consider investing in the routes that show strong and consistent growth, while reevaluating the underperforming ones. The model can also support long-term planning by helping the company allocate resources to the routes that are more popular and it can be retrained regularly with new data to adapt to changes like global events of holidays. 
 
-# Your Task  
-**CSV:** https://docs.google.com/spreadsheets/d/106VMqDhav1rPpEhVJHYQqEW8yZ_kxml7/edit?usp=sharing&ouid=110539250374045439410&rtpof=true&sd=true
-1. Understanding the Data  
-   a) Identify the most and least trafficked routes  
-   b) Analyze trends and/or geographical patterns  
-   c) Create visualizations to demonstrate trends & patterns determined in part b  
-
-2. Build a Model  
-   a) Your model should predict passenger traffic for the next 6–12 months on at least 1 city pair  
-   **NOTE:** Make sure to use proper coding practices (i.e. commenting, camelcase, etc.)!  
-
-4. Evaluate your model  
-   a) Explain your model choices — why did you choose the elements you did  
-   b) Evaluate the model's performance & report the accuracy of the model  
-
-5. Provide Recommendations  
-   a) Which routes should AeroConnect invest more in or scale back from?  
-   b) How can AeroConnect use this model going forward?
-
-
-# Deliverables   
-1. Cleaned (if needed) data from the given CSV
-2. Code for the model
-3. Visualizations from Task 1c)
-4. Answers to questions 1a, 1b, 2a, 2b, 3a, and 3b in PDF format
-5. README file describing your process AND including the link to your cleaned data
-
-
-# Important Steps   
-1. Fork the repo -- This creates a copy of the repo under your account  
-     a) At the top-right corner of the repo page, click "fork"  
-     b) Choose the Github account as the destination  
-     c) Clone the forked repo: "git clone https://github.com/YOUR-USERNAME/data-tech-challenge.git"  
-   ** This is the model you will be sharing during your interview **
-2. **DO NOT PUSH YOUR UPDATED DATA DIRECTLY TO THE FORKED REPO**  
-   Instead, upload it to google drive and include the link in your README file.
-
-Good luck, and have fun with it!
-
-# Communication
-If you have ANY questions, please do not hesitate to reach out to any of the following:    
-- Haley Martin (Director of Data) : martin.hal@northeastern.edu
-- Sonal Gupta (Chief of Data) : gupta.sonal@northeastern.edu
-- Nandeenee Singh (Chief of Data) : singh.nand@northeastern.edu
-- Kaydence Lin (Project Lead of Data) : lin.kay@northeastern.edu
-- Tanisha Joshi (Project Lead of Data) : joshi.tani@northeastern.edu
-- Ben Marler (Tech Lead of Data) : marler.b@northeastern.edu
-- Jerome Rodrigo (Tech Lead of Data) : rodrigo.j@northeastern.edu
 
